@@ -1,5 +1,5 @@
 {
-  "name": "kibana-auth-elasticfence",
+  "name": "kibana-auth-plugin",
   "version": "0.1.3",
   "description": "Elasticfence authentication for kibana",
   "main": "gulpfile.js",
