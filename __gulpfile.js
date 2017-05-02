@@ -39,8 +39,18 @@ Object.keys(pkg.devDependencies).map(function (devDep) {
   include.push('!' + path.join('node_modules', devDep, '**'));
 });
 
-gulp.task('sync', ['build'], function (done) {
-  console.log(kibanaPluginDir);
+gulp.task('cleanKibana', function (done) {
+    Promise.each([path.join(kibanaPluginDir, pkg.name)], function (dir) {
+        return new Promise(function (resolve, reject) {
+            rimraf(dir, function (err) {
+                if (err) return reject(err);
+                resolve();
+            });
+        });
+    }).nodeify(done);
+});
+
+gulp.task('sync', ['cleanKibana', 'build'], function (done) {
   gulp.src('build/**/*')
       .pipe(gulp.dest(kibanaPluginDir));
 });

@@ -33,3 +33,5 @@ License: MIT.
     - Kibana 5.x+ uses Webpack to build bundles.  Kibana needs to be restarted in order for local changes to take effect!
 - `npm run build` will build the code into the `build` directory.
 - `npm run package` will perform the same actions as build, but will also produce a `.tar` file in the `target` directory.
+- `npm run clean` will clean all local build directories
+- `npm run cleanKibana` will remove the build Kibana plugin from the specified local Kibana installation

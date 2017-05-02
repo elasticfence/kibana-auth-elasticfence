@@ -23,6 +23,8 @@
     "url": "git://github.com/hmalphettes/kibana-auth-plugin.git"
   },
   "scripts": {
+    "clean": "gulp --gulpfile __gulpfile.js clean",
+    "cleanKibana": "gulp --gulpfile __gulpfile.js cleanKibana",
     "dev": "gulp --gulpfile __gulpfile.js dev",
     "build": "gulp --gulpfile __gulpfile.js build",
     "package": "gulp --gulpfile __gulpfile.js package",
