@@ -22,7 +22,6 @@ var pathToKibana = config.relativePathToKibana;
 var buildDir = path.resolve(__dirname, 'build');
 var targetDir = path.resolve(__dirname, 'target');
 var buildTarget = path.resolve(buildDir, pkg.name);
-console.log(buildTarget);
 var kibanaPluginDir = path.resolve(__dirname, pathToKibana, 'plugins');
 
 var include = [
@@ -40,7 +39,7 @@ Object.keys(pkg.devDependencies).map(function (devDep) {
   include.push('!' + path.join('node_modules', devDep, '**'));
 });
 
-gulp.task('sync', function (done) {
+gulp.task('sync', ['build'], function (done) {
   console.log(kibanaPluginDir);
   gulp.src('build/**/*')
       .pipe(gulp.dest(kibanaPluginDir));
