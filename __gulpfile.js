@@ -29,6 +29,7 @@ var include = [
   'index.js',
   '**/server/**/*.js',
   '**/public/**/*.js',
+  '**/public/**/*.html',
   '**/public/**/*.jsx'
 ];
 
