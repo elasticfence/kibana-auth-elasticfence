@@ -53,12 +53,15 @@ module.exports = function (server, options) {
             password = request.query.password;
         }
 
-        if (!username && !password) { processing = false; }
+        if (!username && !password) {
+            processing = false;
+        }
+
         if (username || password){
             let encPass = encode(password);
             let client = server.plugins.elasticsearch.client;
-            let callWithRequest = server.plugins.elasticsearch.callWithRequest;
-            //callWithRequest(request, 'search', {
+            // let callWithRequest = server.plugins.elasticsearch.callWithRequest;
+            // callWithRequest(request, 'search', {
             client.search({
                 index:".http_user_auth",
                 allowNoIndices: false,
