@@ -1,6 +1,6 @@
 {
   "name": "kibana-auth-plugin",
-  "version": "0.1.3",
+  "version": "5.1.2",
   "description": "Elasticfence authentication for kibana",
   "main": "gulpfile.js",
   "homepage": "https://github.com/elasticfence/kibana-auth-elasticfence",
@@ -32,8 +32,9 @@
     "release": "rm -rf node_modules && npm install hapi-auth-cookie@3.1.0 && tar cfz ./kauth-latest.tar.gz --exclude .git --exclude .gitignore --exclude kauth-latest.tar.gz ./* && ls -alF kauth-latest*"
   },
   "dependencies": {
+    "crypto": "*",
     "hapi-auth-cookie": "^3.1.0",
-    "crypto": "*"
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "babel-register": "~6.24.1",
