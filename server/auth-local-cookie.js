@@ -28,12 +28,12 @@ module.exports = function (server, options) {
                     '<body>' +
                         '<center>' +
                             '<div class="container" style="width: 20%;margin-left: auto;margin-right:auto;margin-top: 10%;">' +
-                                '<h1><img width="60%" ng-src="/plugins/kibana/settings/sections/about/barcode.svg" src="/plugins/kibana/settings/sections/about/barcode.svg"></h1>' +
+                                '<h1 style="background-color: #e8488b"><img width="60%" src="/bundles/src/ui/public/images/kibana.svg"></h1>' +
                                 (message ? '<h3>' + message + '</h3><br/>' : '') +
-                                '<form id="login-form" class="ng-valid ng-dirty ng-valid-parse" method="get" action="/login">' +
+                                '<form id="login-form" method="get" action="/login">' +
                                     '<div class="form-group inner-addon left-addon">' +
-                                    '<input type="text" style="margin-bottom:8px;font-size: 1.25em;height: auto;" name="username" placeholder="Username" class="form-control ng-valid ng-touched ng-dirty">' +
-                                    '<input type="password" style="font-size: 1.25em;height: auto;" name="password" placeholder="Password" class="form-control ng-valid ng-touched ng-dirty">' +
+                                    '<input type="text" style="margin-bottom:8px;font-size: 1.25em;height: auto;" name="username" placeholder="Username" class="form-control">' +
+                                    '<input type="password" style="font-size: 1.25em;height: auto;" name="password" placeholder="Password" class="form-control">' +
                                     '</div><div style="width:200px;margin-left:auto;margin-right:auto;">' +
                                     '<input type="submit" value="Login" class="btn btn-default login" style="width: 80%;font-size: 1.5em;">' +
                                     '</div>' +
