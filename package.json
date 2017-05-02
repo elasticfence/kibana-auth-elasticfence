@@ -14,7 +14,9 @@
       "email": "lorenzo.mangani@gmail.com"
     }
   ],
-  "keywords": ["kibana" ],
+  "keywords": [
+    "kibana"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -30,5 +32,15 @@
   "dependencies": {
     "hapi-auth-cookie": "^3.1.0",
     "crypto": "*"
+  },
+  "devDependencies": {
+    "babel-register": "~6.24.1",
+    "bluebird": "~3.5.0",
+    "gulp": "~3.9.1",
+    "gulp-eslint": "~2.1.0",
+    "gulp-gzip": "~1.4.0",
+    "gulp-tar": "~1.9.0",
+    "gulp-util": "~3.0.8",
+    "rimraf": "~2.6.1"
   }
 }
