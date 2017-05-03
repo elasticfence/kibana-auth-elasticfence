@@ -2,12 +2,10 @@ require('babel-register')({
   presets: ['es2015']
 });
 
+var config = require('./config.json');
 var gulp = require('gulp');
-var _ = require('lodash');
 var path = require('path');
 var gutil = require('gulp-util');
-var mkdirp = require('mkdirp');
-var Rsync = require('rsync');
 var Promise = require('bluebird');
 var eslint = require('gulp-eslint');
 var rimraf = require('rimraf');
@@ -19,67 +17,51 @@ var pkg = require('./package.json');
 var packageName = pkg.name  + '-' + pkg.version;
 
 // relative location of Kibana install
-var pathToKibana = '../kibana';
+var pathToKibana = config.relativePathToKibana;
 
 var buildDir = path.resolve(__dirname, 'build');
 var targetDir = path.resolve(__dirname, 'target');
 var buildTarget = path.resolve(buildDir, pkg.name);
-var kibanaPluginDir = path.resolve(__dirname, pathToKibana, 'installedPlugins', pkg.name);
+var kibanaPluginDir = path.resolve(__dirname, pathToKibana, 'plugins');
 
 var include = [
   'package.json',
   'index.js',
-  'node_modules',
-  'public',
-  'server'
+  '**/server/**/*.js',
+  '**/public/**/*.js',
+  '**/public/**/*.html',
+  '**/public/**/*.jsx'
 ];
-var exclude = Object.keys(pkg.devDependencies).map(function (name) {
-  return path.join('node_modules', name);
+
+Object.keys(pkg.dependencies).map(function(dep) {
+  include.push(path.join('**/node_modules', dep, '**'));
+});
+Object.keys(pkg.devDependencies).map(function (devDep) {
+  include.push('!' + path.join('node_modules', devDep, '**'));
 });
 
-function syncPluginTo(dest, done) {
-  mkdirp(dest, function (err) {
-    if (err) return done(err);
-    Promise.all(include.map(function (name) {
-      var source = path.resolve(__dirname, name);
-      return new Promise(function (resolve, reject) {
-        var rsync = new Rsync();
-        rsync
-          .source(source)
-          .destination(dest)
-          .flags('uav')
-          .recursive(true)
-          .set('delete')
-          .exclude(exclude)
-          .output(function (data) {
-            process.stdout.write(data.toString('utf8'));
-          });
-        rsync.execute(function (err) {
-          if (err) {
-            console.log(err.message, err.stack);
-            return reject(err);
-          }
-          resolve();
+gulp.task('cleanKibana', function (done) {
+    Promise.each([path.join(kibanaPluginDir, pkg.name)], function (dir) {
+        return new Promise(function (resolve, reject) {
+            rimraf(dir, function (err) {
+                if (err) return reject(err);
+                resolve();
+            });
         });
-      });
-    }))
-    .then(function () {
-      done();
-    })
-    .catch(done);
-  });
-}
+    }).nodeify(done);
+});
 
-gulp.task('sync', function (done) {
-  syncPluginTo(kibanaPluginDir, done);
+gulp.task('sync', ['cleanKibana', 'build'], function (done) {
+  gulp.src('build/**/*')
+      .pipe(gulp.dest(kibanaPluginDir));
 });
 
 gulp.task('lint', function (done) {
   var filePaths = [
-    'gulpfile.js',
-    'server/**/*.js',
-    'public/**/*.js',
-    'public/**/*.jsx',
+    '__gulpfile.js',
+    '**/server/**/*.js',
+    '**/public/**/*.js',
+    '**/public/**/*.jsx'
   ];
 
   return gulp.src(filePaths)
@@ -110,7 +92,7 @@ gulp.task('clean', function (done) {
 });
 
 gulp.task('build', ['clean'], function (done) {
-  syncPluginTo(buildTarget, done);
+  return gulp.src(include).pipe(gulp.dest(buildTarget));
 });
 
 gulp.task('package', ['build'], function (done) {
