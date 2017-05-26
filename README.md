@@ -1,8 +1,14 @@
-Authentication module for Kibana 4
+Authentication module for Kibana 4 and 5
 ==================================
-Authentication module for Kibana 4.x and Elasticfence HTTP Authentication plugin
+Authentication module for Kibana 4.x as well as 5.1.2 (should work with kibana 5.x as long as the version number in the package.json matches) and Elasticfence HTTP Authentication plugin
 
-<img src="https://cloud.githubusercontent.com/assets/1423657/18619991/c47b632e-7e09-11e6-9eff-7b8324ad04c6.png"/>
+**Login**
+
+<img src="https://raw.githubusercontent.com/ryanlutgen/kibana-auth-elasticfence/6057d8154da438db8da2064e728e338ad9a5898a/KibanaLogin.PNG"/>
+
+**Logout**
+
+<img src="https://raw.githubusercontent.com/ryanlutgen/kibana-auth-elasticfence/6057d8154da438db8da2064e728e338ad9a5898a/KibanaLogout.PNG"/>
 
 Requires:
 
