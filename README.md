@@ -17,7 +17,7 @@ Requires:
 
 ## Setup
 ```
-bin/kibana plugin --install kibana-auth-plugin -u https://github.com/elasticfence/kibana-auth-elasticfence/releases/download/snapshot/kauth-latest.tar.gz
+bin/kibana plugin --install kibana-auth-plugin -u https://github.com/elasticfence/kibana-auth-elasticfence/releases/download/5.x/kauth-latest.tar.gz
 ```
 
 ## Usage
