@@ -113,7 +113,8 @@ module.exports = function (server, options) {
     };
 
     server.register(require('hapi-auth-cookie'), (err) => {
-        const authHash = require('uuid/v4')();
+	const authHash = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        const salt = "RJMIgyv5P8gxiylnd7z5vrHj3a91ILBe";
 
         if (err) {
             throw err;
@@ -123,7 +124,7 @@ module.exports = function (server, options) {
         server.app.cache = cache;
 
         server.auth.strategy('session', 'cookie', true, {
-            password: authHash,
+            password: authHash + salt,
             cookie: 'sid',
             redirectTo: '/login',
             isSecure: false,
