@@ -19,7 +19,7 @@ var packageName = pkg.name  + '-' + pkg.version;
 // relative location of Kibana install
 var pathToKibana = config.relativePathToKibana;
 
-var buildDir = path.resolve(__dirname, 'build');
+var buildDir = path.resolve(__dirname, 'build', 'kibana');
 var targetDir = path.resolve(__dirname, 'target');
 var buildTarget = path.resolve(buildDir, pkg.name);
 var kibanaPluginDir = path.resolve(__dirname, pathToKibana, 'plugins');
