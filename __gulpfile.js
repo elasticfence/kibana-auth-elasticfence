@@ -19,9 +19,10 @@ var packageName = pkg.name  + '-' + pkg.version;
 // relative location of Kibana install
 var pathToKibana = config.relativePathToKibana;
 
-var buildDir = path.resolve(__dirname, 'build');
+var buildDir = path.resolve(__dirname, 'build')
+var pkgDir = path.resolve(buildDir, 'kibana');
 var targetDir = path.resolve(__dirname, 'target');
-var buildTarget = path.resolve(buildDir, pkg.name);
+var buildTarget = path.resolve(pkgDir, pkg.name);
 var kibanaPluginDir = path.resolve(__dirname, pathToKibana, 'plugins');
 
 var include = [
@@ -96,7 +97,7 @@ gulp.task('build', ['clean'], function (done) {
 });
 
 gulp.task('package', ['build'], function (done) {
-  return gulp.src(path.join(buildDir, '**', '*'))
+  return gulp.src(path.join(buildDir, '**'))
     .pipe(tar(packageName + '.tar'))
     .pipe(gzip())
     .pipe(gulp.dest(targetDir));
